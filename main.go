@@ -16,9 +16,6 @@ func main() {
 
 	defer file.Close()
 
-	// for saving split line
-	var parts []string
-
 	buffer := make([]byte, 8)
 	currentLine := ""
 
@@ -37,7 +34,7 @@ func main() {
 		currentLine += string(buffer[:bytesRead])
 
 		if strings.Contains(currentLine, "\n") {
-			parts = strings.SplitN(currentLine, "\n", 2)
+			parts := strings.SplitN(currentLine, "\n", 2)
 			fmt.Printf("read: %s\n", parts[0])
 			if len(parts) > 1 {
 				currentLine = parts[1]
