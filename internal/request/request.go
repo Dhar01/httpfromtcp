@@ -12,6 +12,8 @@ var (
 	errInvalidData   = errors.New("invalid data request")
 )
 
+const crlf = "\r\n"
+
 type Request struct {
 	RequestLine RequestLine
 }
@@ -28,7 +30,7 @@ func RequestFromReader(reader io.Reader) (*Request, error) {
 		return nil, err
 	}
 
-	lines := strings.Split(string(rawData), "\r\n")
+	lines := strings.Split(string(rawData), crlf)
 	requestLineParts := strings.Split(lines[0], " ")
 
 	if len(requestLineParts) != 3 {
